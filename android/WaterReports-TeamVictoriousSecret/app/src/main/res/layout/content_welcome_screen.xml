@@ -16,16 +16,37 @@
     <Button
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="Log in"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/loginButton" />
+        android:text="Register"
+        android:id="@+id/registerButton"
+        android:layout_marginTop="82dp"
+        android:layout_below="@+id/loginButton"
+        android:layout_alignStart="@+id/loginButton" />
 
     <Button
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="Register"
+        android:text="Log in"
+        android:id="@+id/loginButton"
+        android:layout_marginTop="17dp"
+        android:layout_below="@+id/returningUsers"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="New User"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginButton"
         android:layout_centerHorizontal="true"
-        android:id="@+id/registerButton"
-        android:layout_below="@id/loginButton"/>
+        android:layout_marginTop="46dp"
+        android:id="@+id/newUser" />
+
+    <TextView
+        android:text="Returning Users"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/returningUsers"
+        android:layout_marginTop="126dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
