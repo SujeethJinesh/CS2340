@@ -1,0 +1,23 @@
+{
+  "name": "cs2340-spring-2017-team-victorious-secret-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SujeethJinesh/CS2340.git"
+  },
+  "author": "Team Victorious Secret",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SujeethJinesh/CS2340/issues"
+  },
+  "homepage": "https://github.com/SujeethJinesh/CS2340#readme",
+  "dependencies": {
+    "express": "^4.14.1"
+  }
+}
