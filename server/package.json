@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/SujeethJinesh/CS2340#readme",
   "dependencies": {
-    "express": "^4.14.1"
+    "express": "^4.14.1",
+    "socket.io": "^1.7.3"
   }
 }
