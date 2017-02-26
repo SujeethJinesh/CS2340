@@ -2,17 +2,13 @@ package edu.gatech.waterreports_teamvictorioussecret;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -32,15 +28,25 @@ public class WelcomeScreen extends AppCompatActivity {
                 newFragment.show(getFragmentManager(), "login");
             }
         });
+
+        SocketIOSession.getInstance().addAttachListener(new Session.AttachListener() {
+            @Override
+            public boolean onAttachSuccess() {
+                Intent intent = new Intent(WelcomeScreen.this, MainScreen.class);
+                WelcomeScreen.this.startActivity(intent);
+                return true;
+            }
+
+            @Override
+            public boolean onAttachFailure(String error) {
+                Toast.makeText(WelcomeScreen.this, error, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
     }
 
     private void tryLogin(String username, String password) {
-        if (username.equals("tim") && password.equals("hunter2")) {
-            Intent intent = new Intent(this, MainScreen.class);
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, "Invalid login", Toast.LENGTH_SHORT).show();
-        }
+        SocketIOSession.getInstance().login(username, password);
     }
 
     private class LoginDialogFragment extends DialogFragment {
