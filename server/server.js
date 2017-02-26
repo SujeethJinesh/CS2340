@@ -168,6 +168,28 @@ var registerEvents = function (socket) {
 			socketSessionMap.delete(socket);
 		}
 	});
+
+	socket.on('get profile', function () {
+		if (socketSessionMap.has(socket)) {
+			var session_id = socketSessionMap.get(socket);
+			if (sessionUserMap.has(session_id)) {
+				var user = sessionUserMap.get(session_id);
+				var profile = profiles[user.email];
+
+				socket.emit('profile update', profile);
+			}
+		}
+	});
+
+	socket.on('update profile', function (data) {
+		if (socketSessionMap.has(socket)) {
+			var session_id = socketSessionMap.get(socket);
+			if (sessionUserMap.has(session_id)) {
+				var user = sessionUserMap.get(session_id);
+				profiles[user.email] = data;
+			}
+		}
+	});
 };
 
 var sendUpdate = function (socket) {
