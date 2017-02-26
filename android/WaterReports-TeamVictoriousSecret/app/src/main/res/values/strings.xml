@@ -3,4 +3,9 @@
     <string name="title_activity_welcome_screen">WelcomeScreen</string>
     <string name="title_activity_main_screen">MainScreen</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="password_confirmation">Password Confirmation</string>
+    <string name="register">Register</string>
+    <string name="cancel">Cancel</string>
 </resources>
