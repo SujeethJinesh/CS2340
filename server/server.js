@@ -69,7 +69,7 @@ var registerEvents = function (socket) {
 			return;
 		}
 
-		if (users[username].session !== null) {
+		if (users[username].session !== null && sessionSocketMap.has(users[username].session)) {
 			sessionSocketMap.get(users[username].session).emit('detach success');
 		}
 
@@ -137,14 +137,18 @@ var registerEvents = function (socket) {
 			return;
 		}
 
-		sessionUserMap.get(socketSessionMap.get(socket)).session = null;
-		sessionUserMap.delete(socketSessionMap.get(socket));
+		var session_id = socketSessionMap.get(socket);
+
+		sessionUserMap.get(session_id).session = null;
+		sessionUserMap.delete(session_id);
 
 		socket.emit('detach success');
 	});
 
 	socket.on('disconnect', function () {
 		if (socketSessionMap.has(socket)) {
+			var session_id = socketSessionMap.get(socket);
+
 			sessionSocketMap.delete(socketSessionMap.get(socket));
 			socketSessionMap.delete(socket);
 		}
@@ -155,7 +159,7 @@ var sendUpdate = function (socket) {
 	if (socketSessionMap.has(socket)) {
 		var session = socketSessionMap.get(socket);
 		socket.emit('session update', {
-			'user': sessionUserMap.get(session)
+			'user': sessionUserMap.get(session) || null
 		});
 	}
 };
