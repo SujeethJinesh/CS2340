@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<script src="https://cdn-orig.socket.io/socket.io-1.4.5.js"></script>
+	<script src="http://wzrd.in/standalone/uuid@latest">
+		"Note: Do not do this in production. Just don't." -- broofa
+	</script>
+	<script>
+		class Session {
+			constructor (session_id) {
+				if (session_id === undefined) {
+					session_id = uuid.v4();
+				}
+
+				var socket = io.connect('https://water-2340.syntaxblitz.net');
+
+				this.socket = socket;
+				this.session_id = session_id;
+				this.user = null;
+
+				socket.on('connect', () => {
+					this.socket.emit('bind session', {
+						'session_id': this.session_id
+					});
+				});
+
+				socket.on('session update', data => {
+					this.user = data.user;
+					console.log('session update', this.user);
+				});
+
+				socket.on('attach success', data => {
+					this.user = data.user;
+					console.log('attached', this.user);
+				});
+
+				socket.on('attach failure', data => {
+					console.error(data.error);
+				});
+
+				socket.on('detach success', () => {
+					this.user = null;
+					console.log('detached');
+				});
+
+				socket.on('detach failure', data => {
+					console.error(data.error);
+				});
+			}
+
+			get logged_in () {
+				return this.user !== null;
+			}
+
+			login (username, password) {
+				this.socket.emit('attach', {
+					'username': username,
+					'password': password
+				});
+			}
+
+			register (username, password, name) {
+				this.socket.emit('register and attach', {
+					'username': username,
+					'password': password,
+					'name': name
+				});
+			}
+
+			logout () {
+				this.socket.emit('detach');
+			}
+
+			update () {
+				this.socket.emit('session update');
+			}
+		}
+
+//		var session = new Session();
+	</script>
+</html>
