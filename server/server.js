@@ -10,11 +10,20 @@ var sessionSocketMap = new Map();
 var sessionUserMap = new Map();
 
 var users = {
-	'tim': {
-		'username': 'tim',
+	'timothy@tacosareawesome.com': {
+		'email': 'timothy@tacosareawesome.com',
 		'password': 'hunter2',
-		'name': 'Timothy J. Aveni',
+		'workerType': 'ADMIN',
 		'session': null
+	}
+};
+
+var profiles = {
+	'timothy@tacosareawesome.com': {
+		'address': '700 Techwood Drive',
+		'name': 'Timothy J. Aveni',
+		'phone': '(404) 555-1123',
+		'password': 'hunter2'
 	}
 };
 
@@ -44,7 +53,7 @@ var registerEvents = function (socket) {
 			return;
 		}
 
-		var username = data.username;
+		var email = data.email;
 		var password = data.password;
 		
 		var session_id = socketSessionMap.get(socket);
@@ -55,29 +64,29 @@ var registerEvents = function (socket) {
 			return;
 		}
 
-		if (!users.hasOwnProperty(username)) {
+		if (!users.hasOwnProperty(email)) {
 			socket.emit('attach failure', {
-				'error': 'That username does not exist.'
+				'error': 'That email does not exist.'
 			});
 			return;
 		}
 
-		if (users[username].password !== password) {
+		if (profiles[email].password !== password) {
 			socket.emit('attach failure', {
 				'error': 'The passwords did not match.'
 			});
 			return;
 		}
 
-		if (users[username].session !== null && sessionSocketMap.has(users[username].session)) {
-			sessionSocketMap.get(users[username].session).emit('detach success');
+		if (users[email].session !== null && sessionSocketMap.has(users[email].session)) {
+			sessionSocketMap.get(users[email].session).emit('detach success');
 		}
 
-		sessionUserMap.set(socketSessionMap.get(socket), users[username]);
-		users[username].session = socketSessionMap.get(socket);
+		sessionUserMap.set(socketSessionMap.get(socket), users[email]);
+		users[email].session = socketSessionMap.get(socket);
 
 		socket.emit('attach success', {
-			user: users[username]
+			user: users[email]
 		});
 	});
 
@@ -89,10 +98,10 @@ var registerEvents = function (socket) {
 			return;
 		}
 
-		var username = data.username;
+		var email = data.email;
 		var password = data.password;
-		var name = data.name;
-		
+		var workerType = data.workerType;
+
 		var session_id = socketSessionMap.get(socket);
 		if (sessionUserMap.has(session_id)) {
 			socket.emit('attach failure', {
@@ -101,24 +110,30 @@ var registerEvents = function (socket) {
 			return;
 		}
 
-		if (users.hasOwnProperty(username)) {
+		if (users.hasOwnProperty(email)) {
 			socket.emit('attach failure', {
-				'error': 'That username is already in use.'
+				'error': 'That email is already in use.'
 			});
 			return;
 		}
 
-		users[username] = {
-			'username': username,
-			'password': password,
-			'name': name,
+		users[email] = {
+			'email': email,
+			'workerType': workerType,
 			'session': session_id
+		};
+
+		profiles[email] = {
+			'email': email,
+			'address': '',
+			'phone': '',
+			'password': password
 		}
 
-		sessionUserMap.set(session_id, users[username]);
+		sessionUserMap.set(session_id, users[email]);
 
 		socket.emit('attach success', {
-			user: users[username]
+			user: users[email]
 		});
 	});
 
