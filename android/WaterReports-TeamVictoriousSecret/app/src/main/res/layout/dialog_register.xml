@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <EditText
+        android:hint="@string/email"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:id="@+id/dialog_register_email"
+        android:ems="10"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/dialog_register_password"
+        android:hint="@string/password"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/dialog_register_password_confirmation"
+        android:hint="@string/password_confirmation"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_register_spinner"
+        android:padding="@dimen/activity_horizontal_margin"/>
+
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<Button-->
+            <!--android:text="@string/cancel"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/button" />-->
+        <!---->
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/register"/>-->
+
+
+    <!--</LinearLayout>-->
 </LinearLayout>
