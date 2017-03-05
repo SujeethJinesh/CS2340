@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "547594433734",
+    "firebase_url": "https://cs2340-spring-2017-team-4.firebaseio.com",
+    "project_id": "cs2340-spring-2017-team-4",
+    "storage_bucket": "cs2340-spring-2017-team-4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547594433734:android:46aa9dc9b4af01e0",
+        "android_client_info": {
+          "package_name": "edu.gatech.cs2340spring2017team4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "547594433734-ogvg2isou21l8l7h3jb6igmlmqm69fl8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_iyyCpzuQwETV_9faNTm_WrPa8hf_ico"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
